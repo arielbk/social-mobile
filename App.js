@@ -1,3 +1,5 @@
+//TODO: migrate this to react navigation v5
+
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import LoadingScreen from './screens/LoadingScreen';
@@ -24,8 +26,14 @@ const AppStack = createStackNavigator({
 });
 
 const AuthStack = createStackNavigator({
-  Login: LoginScreen,
-  Register: RegisterScreen,
+  Login: {
+    screen: LoginScreen,
+    navigationOptions: { headerShown: false }
+  },
+  Register: {
+    screen: RegisterScreen,
+    navigationOptions: { headerShown: false }
+  }
 });
 
 export default createAppContainer(

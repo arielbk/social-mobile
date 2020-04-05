@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image, StatusBar } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import * as firebase from 'firebase';
 
-const RegisterScreen = () => {
+const RegisterScreen = ({ navigation }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
 
-  const handleSignUp = ({ navigation }) => {
+  const handleSignUp = () => {
     firebase.auth()
       .createUserWithEmailAndPassword(email, password)
       .then(userCredentials => userCredentials.user.updateProfile({
@@ -19,7 +20,27 @@ const RegisterScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.greeting}>{`Hello!\nSign up to get started.`}</Text>
+      <StatusBar barStyle="light-content" />
+
+      <Image
+        source={require('../assets/authHeader.png')}
+        style={{ width: 521, resizeMode: 'contain', marginLeft: -50, marginTop: -260, marginBottom: -160 }}
+      />
+      <Image
+        source={require('../assets/authHeader.png')}
+        style={{ width: 521, resizeMode: 'contain', position: 'absolute', bottom: -440, left: 100 }}
+      />
+
+      <TouchableOpacity style={styles.back} onPress={() => navigation.goBack()}>
+        <Ionicons name="ios-arrow-round-back" size={32} color="#fff" />
+      </TouchableOpacity>
+
+      <View style={{ position: 'absolute', top: 64, alignItems: 'center', width: '100%'}}>
+        <Text style={styles.greeting}>{`Hello!\nSign up to get started.`}</Text>
+        <TouchableOpacity style={styles.avatar}>
+          <Ionicons name="ios-add" size={40} color="#fff" style={{ marginTop: 6, marginLeft: 32 }} />
+        </TouchableOpacity>
+      </View>
 
       <View style={styles.errorMessage}>
         {!!error && <Text style={styles.error}>{error}</Text>}
@@ -73,12 +94,14 @@ export default RegisterScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#fff',
   },
   greeting: {
     marginTop: 32,
     fontSize: 19, 
     fontWeight: '400',
     textAlign: 'center',
+    color: '#fff',
   },
   errorMessage: {
     height: 72,
@@ -113,6 +136,26 @@ const styles = StyleSheet.create({
     backgroundColor: '#e0446a',
     borderRadius: 4,
     height: 52,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  back: {
+    position: 'absolute',
+    top: 48,
+    left: 32,
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    backgroundColor: 'rgba(21, 22, 48, 0.1)',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  avatar: {
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    backgroundColor: '#e1e2e6',
+    marginTop: 48,
     justifyContent: 'center',
     alignItems: 'center',
   }

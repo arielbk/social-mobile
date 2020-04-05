@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, StatusBar, Image, LayoutAnimation } from 'react-native';
 import * as firebase from 'firebase';
 
 const LoginScreen = ({ navigation }) => {
@@ -12,8 +12,24 @@ const LoginScreen = ({ navigation }) => {
       .catch(err => setError(err.message))
   }
 
+  LayoutAnimation.easeInEaseOut();
   return (
     <View style={styles.container}>
+      <StatusBar barStyle="light-content" />
+
+      <Image
+        source={require('../assets/authHeader.png')}
+        style={{ width: 521, resizeMode: 'contain', marginLeft: -50, marginTop: -350, marginBottom: -160 }}
+      />
+      <Image
+        source={require('../assets/authHeader.png')}
+        style={{ width: 521, resizeMode: 'contain', position: 'absolute', bottom: -440, left: 100 }}
+      />
+      <Image
+        source={require('../assets/loginLogo.png')}
+        style={{ resizeMode: 'contain', width: 180, marginTop: -180, marginBottom: -100, alignSelf: 'center' }}
+      />
+
       <Text style={styles.greeting}>{`Hello again.\nWelcome back.`}</Text>
 
       <View style={styles.errorMessage}>
@@ -59,9 +75,9 @@ export default LoginScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#fff',
   },
   greeting: {
-    marginTop: 32,
     fontSize: 19, 
     fontWeight: '400',
     textAlign: 'center',
