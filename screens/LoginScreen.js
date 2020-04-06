@@ -23,7 +23,7 @@ const LoginScreen = ({ navigation }) => {
       />
       <Image
         source={require('../assets/authHeader.png')}
-        style={{ width: 521, resizeMode: 'contain', position: 'absolute', bottom: -440, left: 100 }}
+        style={{ width: 521, resizeMode: 'contain', position: 'absolute', bottom: -440, left: 100, opacity: 0.4 }}
       />
       <Image
         source={require('../assets/loginLogo.png')}

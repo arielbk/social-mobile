@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, LayoutAnimation } from 'react-native';
 import * as firebase from 'firebase';
 
 
@@ -18,6 +18,7 @@ const HomeScreen = () => {
     firebase.auth().signOut();
   }
 
+  LayoutAnimation.easeInEaseOut();
   return (
     <View style={styles.container}>
       <Text>Hi {email}!</Text>
@@ -35,5 +36,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#fff',
   }
 });
