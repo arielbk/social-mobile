@@ -10,6 +10,12 @@ class Fire {
     const remoteUri = await this.uploadPhotoAsync(localUri);
 
     return new Promise((res, rej) => {
+      console.log('sending: ', {
+        text,
+        uid: this.uid,
+        timestamp: this.timestamp,
+        image: remoteUri,
+      });
       this.firestore.collection('posts').add({
         text,
         uid: this.uid,

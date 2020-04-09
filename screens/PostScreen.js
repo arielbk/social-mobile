@@ -6,7 +6,6 @@ import * as Permissions from 'expo-permissions';
 import Fire from '../Fire';
 import * as ImagePicker from 'expo-image-picker';
 
-const firebase = require('firebase');
 require('firebase/firestore');
 
 const PostScreen = ({ navigation }) => {
