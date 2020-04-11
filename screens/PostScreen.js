@@ -78,15 +78,18 @@ const PostScreen = ({ navigation }) => {
         <Ionicons name="md-camera" size={32} color="#d8d9db" />
       </TouchableOpacity>
 
-      <View style={{ marginHorizontal: 32, marginTop: 32, height: 150}}>
-        <Image source={{ uri: image }} style={{width: '100%', height: '100%' }} />
-      </View>
+      {image ? (
+        <View style={{ marginHorizontal: 32, marginTop: 32, height: 150}}>
+          <Image source={{ uri: image }} style={{width: '100%', height: '100%' }} />
+        </View>
+      ) : null}
     </SafeAreaView>
 )};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#fff',
   },
   header: {
     flexDirection: 'row',

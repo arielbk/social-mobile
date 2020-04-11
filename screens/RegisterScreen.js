@@ -1,22 +1,46 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image, StatusBar } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import * as firebase from 'firebase';
+import Fire from '../Fire';
+import UserPermissions from '../utilities/UserPermissions';
+import * as ImagePicker from 'expo-image-picker';
 
 const RegisterScreen = ({ navigation }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [avatar, setAvatar] = useState();
+
   const [error, setError] = useState(null);
 
   const handleSignUp = () => {
-    firebase.auth()
-      .createUserWithEmailAndPassword(email, password)
-      .then(userCredentials => userCredentials.user.updateProfile({
-        displayName: name,
-      }))
-      .catch(err => setError(err.message));
-  }
+    // firebase.auth()
+    //   .createUserWithEmailAndPassword(email, password)
+    //   .then(userCredentials => userCredentials.user.updateProfile({
+    //     displayName: name,
+    //   }))
+    //   .catch(err => setError(err.message));
+    Fire.shared.createUser({
+      name,
+      email,
+      password,
+      avatar,
+    })
+  };
+
+  const handlePickAvatar = async () => {
+    UserPermissions.getCameraPermission();
+
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [4, 3],
+    });
+
+    if (!result.cancelled) {
+      setAvatar(result.uri);
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -37,8 +61,9 @@ const RegisterScreen = ({ navigation }) => {
 
       <View style={{ position: 'absolute', top: 64, alignItems: 'center', width: '100%'}}>
         <Text style={styles.greeting}>{`Hello!\nSign up to get started.`}</Text>
-        <TouchableOpacity style={styles.avatar}>
-          <Ionicons name="ios-add" size={40} color="#fff" style={{ marginTop: 6, marginLeft: 32 }} />
+        <TouchableOpacity style={styles.avatarPlaceholder} onPress={handlePickAvatar}>
+          <Image source={{ uri: avatar }} style={styles.avatar} />
+          <Ionicons name="ios-add" size={40} color="#fff" />
         </TouchableOpacity>
       </View>
 
@@ -150,13 +175,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  avatar: {
+  avatarPlaceholder: {
     width: 100,
     height: 100,
-    borderRadius: 50,
     backgroundColor: '#e1e2e6',
+    borderRadius: 48,
     marginTop: 48,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  avatar: {
+    position: 'absolute',
+    width: 100,
+    height: 100,
+    borderRadius: 50,
   }
 });

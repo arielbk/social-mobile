@@ -115,7 +115,10 @@ const AuthStack = createStackNavigator({
   Register: {
     screen: RegisterScreen,
     navigationOptions: { headerShown: false }
-  }
+  },
+},
+{
+  initialRouteName: 'Register'
 });
 
 export default createAppContainer(
