@@ -7,7 +7,7 @@ const posts = [
   {
     id: '1',
     name: 'Some name',
-    text: 'Some lorem ipsum text in here until it feels like it has been enough. I wonder how much text is in the original video. Let us just see what happens if I keep on typing until the end of the line here like this. Yeah? Nah! We shall see what tidings the future hides.',
+    text: 'Some lorem ipsum text in here until it feels like it has been enough. I wonder how much text is in the original video. Let us just see ',
     timestamp: '159110273742',
     avatar: require('../assets/tempAvatar.jpg'),
     image: require('../assets/tempAvatar.jpg'),
@@ -42,28 +42,28 @@ const HomeScreen = () => {
   const renderPost = post => {
     return (
       <View style={styles.feedItem}>
-        <Image source={post.avatar} style={styles.avatar} />
         <View style={{ flex: 1 }}>
-          <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-
-            <View>
-              <Text style={styles.name}>{post.name}</Text>
-              <Text style={styles.timestamp}>
-                {formatDistanceToNow(Date.now() - 10000000, { addSuffix: true })}
-              </Text>
+          <View style={styles.postHeader}>
+            <View style={{ flexDirection: 'row' }}>
+              <Image source={post.avatar} style={styles.avatar} />
+              <View>
+                <Text style={styles.name}>{post.name}</Text>
+                <Text style={styles.timestamp}>
+                  {formatDistanceToNow(Date.now() - 10000000, { addSuffix: true })}
+                </Text>
+              </View>
             </View>
 
             <Ionicons name="ios-more" size={24} color="#73788b" />
           </View>
 
+          <Image source={post.image} style={styles.postImage} resizeMode="cover" />
           <Text style={styles.post}>{post.text}</Text>
 
-          <Image source={post.image} style={styles.postImage} resizeMode="cover" />
-
-          <View style={{ flexDirection: 'row' }}>
+          {/* <View style={{ flexDirection: 'row' }}>
             <Ionicons name="ios-heart-empty" size={24} color="#73788B" style={{ marginRight: 16 }} />
             <Ionicons name="ios-chatboxes" size={24} color="#73788B"  />
-          </View>
+          </View> */}
         </View>
       </View>
     )
@@ -73,9 +73,11 @@ const HomeScreen = () => {
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.headerTitle}>Feed</Text>
-
       </View>
       <FlatList
+        ListHeaderComponent={() => (
+          <View style={styles.topBuffer} />
+        )}
         style={styles.feed}
         data={posts}
         renderItem={({item}) => renderPost(item)}
@@ -90,7 +92,7 @@ export default HomeScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#EFECF4',
+    backgroundColor: '#E6EBEC',
   },
   header: { 
     paddingTop: 64,
@@ -111,13 +113,17 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   },
   feed: {
-    marginHorizontal: 16.
+    marginHorizontal: 16,
+    // marginTop: 32,
+  },
+  topBuffer: {
+    height: 32,
   },
   feedItem: {
     backgroundColor: '#fff',
     borderRadius: 5,
-    padding: 8,
-    flexDirection: 'row',
+    padding: 16,
+    // flexDirection: 'row',
     marginVertical: 8,
   },
   avatar: {
@@ -136,8 +142,13 @@ const styles = StyleSheet.create({
     color: '#c4c6ce',
     marginTop: 4,
   },
+  postHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center'
+  },
   post: {
-    marginTop: 16,
+    marginBottom: 16,
     fontSize: 14,
     color: '#838899',
   },

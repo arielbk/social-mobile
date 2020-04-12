@@ -19,18 +19,18 @@ const LoginScreen = ({ navigation }) => {
 
       <Image
         source={require('../assets/authHeader.png')}
-        style={{ width: 521, resizeMode: 'contain', marginLeft: -50, marginTop: -350, marginBottom: -160 }}
+        style={{ width: 504, resizeMode: 'contain', marginLeft: -50, marginTop: -100, marginBottom: 0 }}
       />
-      <Image
+      <Image 
         source={require('../assets/authHeader.png')}
-        style={{ width: 521, resizeMode: 'contain', position: 'absolute', bottom: -440, left: 100, opacity: 0.4 }}
+        style={{ width: 504, resizeMode: 'contain', position: 'absolute', bottom: -180, left: 50, opacity: 0.4, transform: [{ rotate: '-20deg' }] }}
       />
       <Image
         source={require('../assets/loginLogo.png')}
         style={{ resizeMode: 'contain', width: 180, marginTop: -180, marginBottom: -100, alignSelf: 'center' }}
       />
 
-      <Text style={styles.greeting}>{`Hello again.\nWelcome back.`}</Text>
+      <Text style={styles.greeting}>{`SocialApp`}</Text>
 
       <View style={styles.errorMessage}>
         {!!error && <Text style={styles.error}>{error}</Text>}
@@ -59,12 +59,12 @@ const LoginScreen = ({ navigation }) => {
       </View>
 
       <TouchableOpacity style={styles.button} onPress={handleLogin}>
-        <Text style={{ color: '#fff', fontWeight: '500' }}>Sign in</Text>
+        <Text style={styles.buttonText}>Sign in</Text>
       </TouchableOpacity>
 
       <TouchableOpacity style={{ alignSelf: 'center', marginTop: 32 }} onPress={() => navigation.navigate('Register')}>
         <Text style={{ color: '#414959', fontSize: 13}}>
-          New to SocialApp? <Text style={{ fontWeight: '500', color: '#e9446a'}}>Sign Up</Text>
+          New to SocialApp? <Text style={{ fontWeight: '500', color: '#1F7EED'}}>Sign Up</Text>
         </Text>
       </TouchableOpacity>
     </View>
@@ -78,9 +78,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   greeting: {
-    fontSize: 19, 
-    fontWeight: '400',
+    fontSize: 48, 
+    fontWeight: '800',
     textAlign: 'center',
+    color: '#007AFF',
   },
   errorMessage: {
     height: 72,
@@ -89,7 +90,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   error: {
-    color: '#e9446a',
+    color: '#FF3B30',
     fontSize: 13,
     fontWeight: '600',
     textAlign: 'center',
@@ -112,10 +113,15 @@ const styles = StyleSheet.create({
   },
   button: {
     marginHorizontal: 30,
-    backgroundColor: '#e0446a',
-    borderRadius: 4,
+    backgroundColor: '#1F7EED',
+    borderRadius: 26,
     height: 52,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  buttonText: {
+    fontSize: 18,
+    color: '#fff',
+    fontWeight: '500',
   }
 });

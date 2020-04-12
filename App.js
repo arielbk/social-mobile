@@ -30,16 +30,16 @@ const TabNavigation = () => (
             <Ionicons
               name="ios-add-circle"
               size={48}
-              color="#e9446a"
-              style={{
-                shadowColor: '#e9446a',
-                shadowOffset: {
-                  width: 0,
-                  height: 0,
-                },
-                shadowRadius: 10,
-                shadowOpacity: 0.3,
-              }}
+              color="#007AFF"
+              // style={{
+              //   shadowColor: '#007AFF',
+              //   shadowOffset: {
+              //     width: 0,
+              //     height: 0,
+              //   },
+              //   shadowRadius: 10,
+              //   shadowOpacity: 0.3,
+              // }}
             />
           )
         }
@@ -54,8 +54,8 @@ const TabNavigation = () => (
       },
     })}
     tabBarOptions={{
-      activeTintColor: '#161f3d',
-      inactiveTintColor: '#b8bbc4',
+      activeTintColor: '#919191',
+      inactiveTintColor: '#D2D2D2',
       showLabel: false,
     }}
     navigationOptions={{
@@ -98,7 +98,7 @@ const AuthNavigation = () => (
     <AuthStack.Screen name="Login" component={LoginScreen} />
     <AuthStack.Screen name="Register" component={RegisterScreen} />
   </AuthStack.Navigator>
-)
+);
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState();

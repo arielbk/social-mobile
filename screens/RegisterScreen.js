@@ -48,30 +48,33 @@ const RegisterScreen = ({ navigation }) => {
 
       <Image
         source={require('../assets/authHeader.png')}
-        style={{ width: 521, resizeMode: 'contain', marginLeft: -50, marginTop: -260, marginBottom: -160 }}
+        style={{ width: 504, resizeMode: 'contain', marginLeft: -50, marginTop: -140, marginBottom: 100 }}
       />
-      <Image
+      <Image 
         source={require('../assets/authHeader.png')}
-        style={{ width: 521, resizeMode: 'contain', position: 'absolute', bottom: -440, left: 100, opacity: 0.4 }}
+        style={{ width: 504, resizeMode: 'contain', position: 'absolute', bottom: -180, left: 50, opacity: 0.4, transform: [{ rotate: '-20deg' }] }}
       />
 
       <TouchableOpacity style={styles.back} onPress={() => navigation.goBack()}>
         <Ionicons name="ios-arrow-round-back" size={32} color="#fff" />
       </TouchableOpacity>
 
-      <View style={{ position: 'absolute', top: 64, alignItems: 'center', width: '100%'}}>
-        <Text style={styles.greeting}>{`Hello!\nSign up to get started.`}</Text>
+      <View style={styles.headerContainer}>
+        <Text style={styles.greetingTitle}>Sign Up</Text>
+        {/* <Text style={styles.greeting}>Sign up to get started.</Text> */}
         <TouchableOpacity style={styles.avatarPlaceholder} onPress={handlePickAvatar}>
           <Image source={{ uri: avatar }} style={styles.avatar} />
-          <Ionicons name="ios-add" size={40} color="#fff" />
+          <Ionicons name="ios-add" size={100} color="#fff" />
         </TouchableOpacity>
       </View>
 
-      <View style={styles.errorMessage}>
-        {!!error && <Text style={styles.error}>{error}</Text>}
-      </View>
 
       <View style={styles.form}>
+
+        
+        <View style={styles.errorMessage}>
+          {!!error && <Text style={styles.error}>{error}</Text>}
+        </View>
         <View>
           <Text style={styles.inputTitle}>Full Name</Text>
           <TextInput
@@ -103,12 +106,12 @@ const RegisterScreen = ({ navigation }) => {
       </View>
 
       <TouchableOpacity style={styles.button} onPress={handleSignUp}>
-        <Text style={{ color: '#fff', fontWeight: '500' }}>Sign up</Text>
+        <Text style={styles.buttonText}>Sign Up</Text>
       </TouchableOpacity>
 
       <TouchableOpacity style={{ alignSelf: 'center', marginTop: 32 }} onPress={() => navigation.navigate('Login')}>
         <Text style={{ color: '#414959', fontSize: 13}}>
-          Already have an account? <Text style={{ fontWeight: '500', color: '#e9446a'}}>Login</Text>
+          Already have an account? <Text style={{ fontWeight: '500', color: '#1F7EED'}}>Login</Text>
         </Text>
       </TouchableOpacity>
     </View>
@@ -121,9 +124,20 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
+  headerContainer: {
+    alignItems: 'center',
+    width: '100%',
+    marginTop: -120
+  },
+  greetingTitle: {
+    fontSize: 42, 
+    fontWeight: '800',
+    textAlign: 'center',
+    color: '#1886B3',
+    marginBottom: 0,
+  },
   greeting: {
-    marginTop: 32,
-    fontSize: 19, 
+    fontSize: 18, 
     fontWeight: '400',
     textAlign: 'center',
     color: '#fff',
@@ -143,6 +157,7 @@ const styles = StyleSheet.create({
   form: {
     marginBottom: 48,
     marginHorizontal: 30,
+    marginTop: -30,
   },
   inputTitle: {
     color: '#8a8f9e',
@@ -153,16 +168,22 @@ const styles = StyleSheet.create({
     borderBottomColor: '#8a8f9e',
     borderBottomWidth: StyleSheet.hairlineWidth,
     height: 40,
+    width: '100%',
     fontSize: 15,
     color: '#161f3d',
   },
   button: {
     marginHorizontal: 30,
-    backgroundColor: '#e0446a',
-    borderRadius: 4,
+    backgroundColor: '#1F7EED',
+    borderRadius: 26,
     height: 52,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  buttonText: {
+    fontSize: 18,
+    color: '#fff',
+    fontWeight: '500',
   },
   back: {
     position: 'absolute',
@@ -178,9 +199,10 @@ const styles = StyleSheet.create({
   avatarPlaceholder: {
     width: 100,
     height: 100,
-    backgroundColor: '#e1e2e6',
+    backgroundColor: '#C1CFD4',
     borderRadius: 48,
     marginTop: 48,
+    marginBottom: 0,
     justifyContent: 'center',
     alignItems: 'center',
   },

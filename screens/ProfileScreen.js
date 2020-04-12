@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Button, Image } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import Fire from '../Fire';
 
 const ProfileScreen = () => {
@@ -21,73 +21,110 @@ const ProfileScreen = () => {
 
   return (
     <View style={styles.container}>
-      <View style={{ marginTop: 64, alignItems: 'center' }}>
-        <View style={styles.avatarContainer}>
-          <Image
-            style={styles.avatar}
-            source={avatar ? { uri: avatar } : require('../assets/tempAvatar.jpg') }
-          />
+        {/* <Image
+          source={require('../assets/authHeader.png')}
+          style={{ width: 504, resizeMode: 'contain', marginLeft: -50, marginTop: -100, marginBottom: 0 }}
+        /> */}
+      <View style={styles.profileContainer}>
+        <View style={{ marginTop: 64, alignItems: 'center' }}>
+          <View style={styles.avatarContainer}>
+            <Image
+              style={styles.avatar}
+              source={avatar ? { uri: avatar } : require('../assets/tempAvatar.jpg') }
+            />
+          </View>
+          <Text style={styles.name}>{name}</Text>
         </View>
-        <Text style={styles.name}>{name}</Text>
+        <View style={styles.statsContainer}>
+          <View style={styles.stat}>
+            <Text style={styles.statAmount}>21</Text>
+            <Text style={styles.statTitle}>Posts</Text>
+          </View>
+          <View style={styles.stat}>
+            <Text style={styles.statAmount}>981</Text>
+            <Text style={styles.statTitle}>Followers</Text>
+          </View>
+          <View style={styles.stat}>
+            <Text style={styles.statAmount}>63</Text>
+            <Text style={styles.statTitle}>Following</Text>
+          </View>
+        </View>
       </View>
-      <View style={styles.statsContainer}>
-        <View style={styles.stat}>
-          <Text style={styles.statAmount}>21</Text>
-          <Text style={styles.statTitle}>Posts</Text>
-        </View>
-        <View style={styles.stat}>
-          <Text style={styles.statAmount}>981</Text>
-          <Text style={styles.statTitle}>Followers</Text>
-        </View>
-        <View style={styles.stat}>
-          <Text style={styles.statAmount}>63</Text>
-          <Text style={styles.statTitle}>Following</Text>
-        </View>
-      </View>
-      <Button onPress={() => Fire.shared.signOut()} title="Log out" /> 
+      <TouchableOpacity style={styles.button} onPress={() => Fire.shared.signOut()}>
+        <Text style={styles.buttonText}>Log out</Text>
+      </TouchableOpacity>
     </View>
 )};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: 'center',
+    backgroundColor: '#E6EBEC',
   },
   avatarContainer: {
     shadowColor: '#151734',
     shadowRadius: 15,
-    shadowOpacity: 0.4,
+    shadowOpacity: 0.2,
+    borderRadius: 73,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 150,
+    height: 150,
+    backgroundColor: '#fff',
   },
   avatar: {
-    width: 136,
-    height: 136,
+    width: 140,
+    height: 140,
     borderRadius: 68,
   },
   name: {
     marginTop: 24,
-    fontSize: 16,
-    fontWeight: '600',
+    fontSize: 42,
+    fontWeight: '800',
+    color: '#1886B3',
+    // marginBottom: 80,
   },
   statsContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    margin: 32,    
+    justifyContent: 'space-around',
+    marginHorizontal: 16,
+    marginVertical: 64,
+    marginBottom: 128,
   },
   stat: {
     alignItems: 'center',
     justifyContent: 'center',
-    flex: 1,
+    padding: 18,
+    minWidth: 100,
+    borderRadius: 19,
+    backgroundColor: '#fff',
   },
   statAmount: {
-    color: '#4F566D',
-    fontSize: 18,
-    fontWeight: '300',
+    color: '#5AC8FA',
+    fontSize: 36,
+    fontWeight: '600',
   },
   statTitle: {
     color: '#c3c5cd',
-    fontSize: 12,
+    fontSize: 16,
     fontWeight: '500',
     marginTop: 4,
-  }
+  },
+  button: {
+    marginHorizontal: 30,
+    marginBottom: 42,
+    backgroundColor: '#1F7EED',
+    borderRadius: 26,
+    height: 52,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  buttonText: {
+    fontSize: 18,
+    color: '#fff',
+    fontWeight: '500',
+  },
 });
 
 export default ProfileScreen;
