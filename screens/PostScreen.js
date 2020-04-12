@@ -5,6 +5,7 @@ import Constants from 'expo-constants';
 import * as Permissions from 'expo-permissions';
 import Fire from '../Fire';
 import * as ImagePicker from 'expo-image-picker';
+import UserPermissions from '../utilities/UserPermissions';
 
 require('firebase/firestore');
 
@@ -12,19 +13,21 @@ const PostScreen = ({ navigation }) => {
   const [text, setText] = useState('');
   const [image, setImage] = useState('');
 
-  useEffect(() => {
-    getPhotoPermission();
+useEffect(() => {
+    UserPermissions.getCameraPermission();
   }, []);
 
-  const getPhotoPermission = async () => {
-    if (Constants.platform.ios) {
-      const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
-      
-      if (status != 'granted') {
-        alert('We need permission to access your camera roll');
-      }
-    }
-  }
+useEffect(() => {
+  const unsubscribe = navigation.addListener('tabPress', e => {
+    // Prevent default behavior
+    e.preventDefault();
+
+    // Do something manually
+    navigation.navigate('postModal')
+  });
+
+  return unsubscribe;
+}, [navigation]);
 
   const handlePost = () => {
     Fire.shared.addPost({ text, localUri: image })
