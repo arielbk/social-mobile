@@ -1,55 +1,36 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, FlatList, Image } from 'react-native';
+import { View, Text, StyleSheet, FlatList, Image, ActivityIndicator } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { formatDistanceToNow } from 'date-fns';
-
-const posts = [
-  {
-    id: '1',
-    name: 'Some name',
-    text: 'Some lorem ipsum text in here until it feels like it has been enough. I wonder how much text is in the original video. Let us just see ',
-    timestamp: '159110273742',
-    avatar: require('../assets/tempAvatar.jpg'),
-    image: require('../assets/tempAvatar.jpg'),
-  },
-  {
-    id: '2',
-    name: 'Some name',
-    text: 'Some lorem ipsum text in here until it feels like it has been enough. I wonder how much text is in the original video. Let us just see what happens if I keep on typing until the end of the line here like this. Yeah? Nah! We shall see what tidings the future hides.',
-    timestamp: '159110273742',
-    avatar: require('../assets/tempAvatar.jpg'),
-    image: require('../assets/tempAvatar.jpg'),
-  },
-  {
-    id: '3',
-    name: 'Some name',
-    text: 'Some lorem ipsum text in here until it feels like it has been enough. I wonder how much text is in the original video. Let us just see what happens if I keep on typing until the end of the line here like this. Yeah? Nah! We shall see what tidings the future hides.',
-    timestamp: '159110273742',
-    avatar: require('../assets/tempAvatar.jpg'),
-    image: require('../assets/tempAvatar.jpg'),
-  },
-  {
-    id: '4',
-    name: 'Some name',
-    text: 'Some lorem ipsum text in here until it feels like it has been enough. I wonder how much text is in the original video. Let us just see what happens if I keep on typing until the end of the line here like this. Yeah? Nah! We shall see what tidings the future hides.',
-    timestamp: '159110273742',
-    avatar: require('../assets/tempAvatar.jpg'),
-    image: require('../assets/tempAvatar.jpg'),
-  },
-]
+import firebase from 'firebase';
 
 const HomeScreen = () => {
+  const [posts, setPosts] = useState();
+
+  firebase.firestore().collection('posts').get()
+    .then(snapshot => {
+      if (snapshot.empty) {
+        console.log('No posts found');
+        return;
+      }
+
+      const fetchedPosts = [];
+      snapshot.forEach(doc => fetchedPosts.push({ id: doc.id, ...doc.data()}));
+      setPosts(fetchedPosts.sort((a, b) => b.timestamp - a.timestamp));
+    })
+    .catch(err => console.error(err));
+
   const renderPost = post => {
     return (
       <View style={styles.feedItem}>
         <View style={{ flex: 1 }}>
           <View style={styles.postHeader}>
             <View style={{ flexDirection: 'row' }}>
-              <Image source={post.avatar} style={styles.avatar} />
+              <Image source={require('../assets/tempAvatar.jpg')} style={styles.avatar} />
               <View>
-                <Text style={styles.name}>{post.name}</Text>
+                <Text style={styles.name}>Post title</Text>
                 <Text style={styles.timestamp}>
-                  {formatDistanceToNow(Date.now() - 10000000, { addSuffix: true })}
+                  {formatDistanceToNow(post.timestamp, { addSuffix: true })}
                 </Text>
               </View>
             </View>
@@ -57,18 +38,15 @@ const HomeScreen = () => {
             <Ionicons name="ios-more" size={24} color="#73788b" />
           </View>
 
-          <Image source={post.image} style={styles.postImage} resizeMode="cover" />
+          <Image source={{ uri: post.image }} style={styles.postImage} resizeMode="cover" />
           <Text style={styles.post}>{post.text}</Text>
-
-          {/* <View style={{ flexDirection: 'row' }}>
-            <Ionicons name="ios-heart-empty" size={24} color="#73788B" style={{ marginRight: 16 }} />
-            <Ionicons name="ios-chatboxes" size={24} color="#73788B"  />
-          </View> */}
         </View>
       </View>
     )
   }
 
+  if (!posts) return <ActivityIndicator size="large" />;
+  console.log(posts);
   return (
     <View style={styles.container}>
       <View style={styles.header}>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -27,20 +28,16 @@ const TabNavigation = () => (
       tabBarIcon: ({ focused, color, size }) => {
         if (route.name === 'Post') {
           return (
-            <Ionicons
-              name="ios-add-circle"
-              size={48}
-              color="#007AFF"
-              // style={{
-              //   shadowColor: '#007AFF',
-              //   shadowOffset: {
-              //     width: 0,
-              //     height: 0,
-              //   },
-              //   shadowRadius: 10,
-              //   shadowOpacity: 0.3,
-              // }}
-            />
+            <View style={{
+              width: 42,
+              height: 42,
+              borderRadius: 24,
+              backgroundColor: '#007AFF',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+              <Ionicons name="ios-add" size={36} color="#fff" />
+            </View>
           )
         }
 

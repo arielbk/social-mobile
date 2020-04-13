@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
     marginTop: 24,
     fontSize: 42,
     fontWeight: '800',
-    color: '#1886B3',
+    color: '#1F7EED',
     // marginBottom: 80,
   },
   statsContainer: {
@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
   button: {
     marginHorizontal: 30,
     marginBottom: 42,
-    backgroundColor: '#1F7EED',
+    backgroundColor: '#fff',
     borderRadius: 26,
     height: 52,
     justifyContent: 'center',
@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 18,
-    color: '#fff',
+    color: '#1F7EED',
     fontWeight: '500',
   },
 });
