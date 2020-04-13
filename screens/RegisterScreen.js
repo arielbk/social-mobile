@@ -127,20 +127,14 @@ const styles = StyleSheet.create({
   headerContainer: {
     alignItems: 'center',
     width: '100%',
-    marginTop: -120
+    marginTop: -100
   },
   greetingTitle: {
     fontSize: 42, 
     fontWeight: '800',
     textAlign: 'center',
     color: '#1886B3',
-    marginBottom: 0,
-  },
-  greeting: {
-    fontSize: 18, 
-    fontWeight: '400',
-    textAlign: 'center',
-    color: '#fff',
+    marginBottom: -20,
   },
   errorMessage: {
     height: 72,

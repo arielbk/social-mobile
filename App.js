@@ -100,6 +100,10 @@ const AuthNavigation = () => (
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState();
 
+  console.ignoredYellowBox = [
+    'Setting a timer'
+    ];
+
   firebase.auth().onAuthStateChanged(user => {
     setIsLoggedIn(!!firebase.auth().currentUser)
   });
