@@ -12,17 +12,17 @@ The app is basic but is a good opportunity to see how a full stack mobile app wi
 
 ## Auth: login and registration
 
-![Login](https://github.com/arielbk/social-mobile/screenshots/login.png "Login")
+![Login](https://github.com/arielbk/social-mobile/raw/master/screenshots/login.png "Login")
 
-![Register](https://github.com/arielbk/social-mobile/screenshots/register.png "Register")
+![Register](https://github.com/arielbk/social-mobile/raw/master/screenshots/signup.png "Register")
 
 ## Adding posts (adding data to Firestore)
 
-![Compose](https://github.com/arielbk/social-mobile/screenshots/compose.png "Compose")
+![Compose](https://github.com/arielbk/social-mobile/raw/master/screenshots/compose.png "Compose")
 
 ## Displaying user posts in a feed
 
-![Post feed](https://github.com/arielbk/social-mobile/screenshots/feed.png "Post feed")
+![Post feed](https://github.com/arielbk/social-mobile/raw/master/screenshots/feed.png "Post feed")
 
 # Running the app locally
 
